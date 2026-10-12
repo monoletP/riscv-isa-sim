@@ -1,7 +1,8 @@
 // vfwcvt.f.f.v vd, vs2, vm
 VI_VFP_CVT_SCALE
 ({
-  ;
+  auto vs2 = P.VU.elt<float8_t>(rs2_num, i, vu_idx);
+  P.VU.elt<float16_t>(rd_num, i, vu_idx, true) = f8_to_f16(vs2);
 },
 {
   auto vs2 = P.VU.elt<float16_t>(rs2_num, i, vu_idx);
@@ -20,4 +21,4 @@ VI_VFP_CVT_SCALE
 {
   require(p->extension_enabled('D'));
 },
-true, (P.VU.vsew >= 16))
+true, (P.VU.vsew >= 8))
